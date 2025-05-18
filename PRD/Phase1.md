@@ -31,7 +31,7 @@ NEXTAUTH_URL=http://localhost:3000
 2. APIルートの作成（NextAuth.js）
 
 ファイル：src/app/api/auth/[...nextauth]/route.ts
-```py
+```ts
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -50,7 +50,7 @@ export { handler as GET, handler as POST };
 3. UI側の設定（ログインUIの構築）
 
 ファイル：src/app/page.tsx
-```py
+```ts
 'use client';
 
 import { SessionProvider, useSession, signIn, signOut } from 'next-auth/react';
