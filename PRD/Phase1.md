@@ -23,12 +23,12 @@
 
 取得した以下の値を .env.local に設定：
 
-'''
+```
 GITHUB_CLIENT_ID=xxxxx
 GITHUB_CLIENT_SECRET=yyyyy
 NEXTAUTH_SECRET=適当なランダム文字列
 NEXTAUTH_URL=http://localhost:3000
-'''
+```
 
 #### 2. APIルートの作成（NextAuth.js）
 

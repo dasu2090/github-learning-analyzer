@@ -20,7 +20,7 @@
 
 ファイル：src/lib/github.ts
 
-'''ts
+```ts
 export async function fetchUserRepos(accessToken: string) {
   const res = await fetch('https://api.github.com/user/repos?per_page=100', {
     headers: {
@@ -35,11 +35,11 @@ export async function fetchUserRepos(accessToken: string) {
 
   return await res.json();
 }
-'''
+```
 
 #### ② page.tsx にデータ取得と表示処理を追加
 
-'''ts
+```ts
 'use client';
 
 import { SessionProvider, useSession, signIn, signOut } from 'next-auth/react';
@@ -98,13 +98,13 @@ function HomePage() {
     </main>
   );
 }
-'''
+```
 
 #### ③ next-auth 設定でトークンをセッションに追加する
 
 ファイル：src/app/api/auth/[...nextauth]/route.ts
 
-'''
+```
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -130,7 +130,7 @@ const handler = NextAuth({
 });
 
 export { handler as GET, handler as POST };
-'''
+```
 
 ### ✅ 動作確認ポイント
 
