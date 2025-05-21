@@ -48,3 +48,23 @@ function getLevel(count: number): number {
   if (count < 20) return 3;
   return 4;
 }
+
+export async function fetchLanguagesForAllRepos(token: string, repos: any[]) {
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+  };
+
+  const languageMap: Record<string, number> = {};
+
+  for (const repo of repos) {
+    const res = await fetch(repo.languages_url, { headers });
+    const data = await res.json();
+
+    for (const [lang, bytes] of Object.entries(data)) {
+      languageMap[lang] = (languageMap[lang] || 0) + (bytes as number);
+    }
+  }
+
+  return languageMap;
+}
