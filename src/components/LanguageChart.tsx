@@ -23,6 +23,7 @@ export default function LanguageChart({ data }: { data: { language: string; perc
             outerRadius={100}
             fill="#8884d8"
             label
+            labelLine
           >
             {parsedData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
