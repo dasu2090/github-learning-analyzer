@@ -50,10 +50,25 @@ function HomePage() {
       import('@/lib/github').then(({ fetchLanguagesForAllRepos }) => {
         fetchLanguagesForAllRepos(session.accessToken, repos).then((languageMap) => {
           const total = Object.values(languageMap).reduce((sum, v) => sum + v, 0);
-          const percentages = Object.entries(languageMap).map(([lang, bytes]) => ({
-            language: lang,
-            percentage: ((bytes as number) / total * 100).toFixed(2),
-          }));
+
+            const percentages = Object.entries(languageMap).reduce((acc: any[], [lang, bytes]) => {
+              const percentage = (bytes as number) / total * 100;
+              if (percentage < 1) {
+                const other = acc.find((a) => a.language === 'Other');
+                if (other) {
+                  other.percentage += percentage;
+                } else {
+                  acc.push({ language: 'Other', percentage });
+                }
+              } else {
+                acc.push({ language: lang, percentage });
+              }
+              return acc;
+            }, []).map(item => ({
+              language: item.language,
+              percentage: item.percentage.toFixed(2),
+            }));
+
           setLanguageStats(percentages);
         });
       });
